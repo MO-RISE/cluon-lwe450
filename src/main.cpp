@@ -46,7 +46,7 @@ auto main(int argc, char **argv) -> int {
       "gather",
       "Run in data gathering mode, i.e connect to a UDP stream, listen for "
       "incoming LWE450 messages and publish them on an OD4 session. "
-      "Optionally, it is possible to dump the incoming LWE450 sentences "
+      "Optionally, it is possible to dump the incoming LWE450 messages "
       "directly to disk");
   std::string address;
   gather->add_option("-a,--address", address, "IP address of stream")
@@ -60,7 +60,7 @@ auto main(int argc, char **argv) -> int {
   bool standalone = false;
   gather->add_flag("--standalone", standalone,
                    "If application should be run in standalone mode, i.e. "
-                   "dumping any incoming LWE450 sentences directly to disk "
+                   "dumping any incoming LWE450 messages directly to disk "
                    "instead of publishing to an OD4 session");
   gather->callback([&]() {
     cluon::OD4Session od4{cid};
@@ -71,8 +71,8 @@ auto main(int argc, char **argv) -> int {
       (*sink)->set_pattern("%v");
     }
 
-    // Wrap everything in a sentence handler lambda
-    auto sentence_handler =
+    // Wrap everything in a message handler lambda
+    auto message_handler =
         [&od4, &id, &sink, &verbose](
             const Message &msg,
             const std::chrono::system_clock::time_point &tp) {
@@ -101,7 +101,7 @@ auto main(int argc, char **argv) -> int {
         };
 
     // And finally use this in a MessageAssembler
-    LWE450MessageAssembler assembler(sentence_handler);
+    LWE450MessageAssembler assembler(message_handler);
 
     // Setup a connection to an UDP multicast group
     // messages

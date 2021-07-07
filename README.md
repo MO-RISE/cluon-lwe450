@@ -3,7 +3,7 @@
 Copyright 2021 RISE Research Institute of Sweden - Maritime Operations. Licensed under the Apache License Version 2.0. For details, please contact Fredrik Olsson (fredrik.x.olsson(at)ri.se).
 
 A [libcluon](https://github.com/chrberger/libcluon)-based microservice for listening in on a multicast-based LWE450 network. This software does not perform any parsing of the LWE450 messages, merely assembles any fragmented messages into full messages. It can be run in two modes:
-* `gather`, join a multicast group part of a LWE450 network and start receiving message and either:
+* `gather`, join a multicast group part of a LWE450 network and start receiving messages and either:
   * publish to an OD4 session, or
   * log directly to disk (`--standalone`)
 * `log`, listen to an OD4 session for raw LWE450 messages from other `gatherers`  and dump these to an aggregated log file on disk

@@ -58,7 +58,7 @@ TEST_CASE("Test LWE450MessageAssembler with payload of wrong format") {
   REQUIRE_EQ(call_count, 0);
 }
 
-TEST_CASE("Test LWE450MessageAssembler with single correct sentence") {
+TEST_CASE("Test LWE450MessageAssembler with single correct message") {
   size_t call_count{0};
   Message output;
 
@@ -84,7 +84,7 @@ TEST_CASE("Test LWE450MessageAssembler with single correct sentence") {
 }
 
 TEST_CASE(
-    "Test LWE450MessageAssembler with single correct sentence inbetween "
+    "Test LWE450MessageAssembler with single correct message inbetween "
     "scramble") {
   size_t call_count{0};
   Message output;
@@ -112,7 +112,7 @@ TEST_CASE(
   REQUIRE_EQ(call_count, 1);
 }
 
-TEST_CASE("Test LWE450MessageAssembler with multiple sentences") {
+TEST_CASE("Test LWE450MessageAssembler with multiple messages") {
   size_t call_count{0};
   std::vector<Message> output;
 
@@ -158,7 +158,7 @@ TEST_CASE("Test LWE450MessageAssembler with multiple sentences") {
       "Vf`Wwwwwp202T84=V3I`Vf`Wwwwwp202T84=V,0*5F");
 }
 
-TEST_CASE("Test LWE450MessageAssembler with split sentence") {
+TEST_CASE("Test LWE450MessageAssembler with split message") {
   size_t call_count{0};
   std::vector<Message> output;
 
