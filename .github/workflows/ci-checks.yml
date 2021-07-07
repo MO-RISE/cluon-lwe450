@@ -1,0 +1,62 @@
+name: CI checks
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+
+jobs:
+
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Set up Python 3"
+        uses: actions/setup-python@v2
+        with: 
+          python-version: '3.x'
+
+      - name: Install deps
+        run: |
+          pip install -r requirements_dev.txt
+
+      - name: Run clang-format
+        run: |
+          find src/ -iname *.hpp -o -iname *.cpp | xargs clang-format -i --style=Google
+          find tests/ -iname *.hpp -o -iname *.cpp | xargs clang-format -i --style=Google
+          git diff --name-only --exit-code
+
+      - name: Run linter
+        run: |
+          cpplint --quiet --recursive src/ tests/
+
+  testing:
+    runs-on: ubuntu-latest
+    needs: [linting]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
+      - name: Configure and build
+        run: |
+          cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -- -j 8
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest -C Debug -T test --output-on-failure --
