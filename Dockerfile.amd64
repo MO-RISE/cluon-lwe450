@@ -1,0 +1,39 @@
+#  Copyright 2021 RISE Research Institute of Sweden - Maritime Operations
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+FROM alpine:3.13 as builder
+RUN apk update && \
+    apk --no-cache add \
+    cmake \
+    g++ \
+    make \
+    upx \
+    linux-headers  \
+    git
+ADD . /opt/sources
+WORKDIR /opt/sources
+RUN cmake -Bbuild -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/tmp/cluon-lwe450-dest && \
+    cmake --build build --target install && upx -9 /tmp/cluon-lwe450-dest/bin/cluon-lwe450  && \
+    cd build && ctest -T test --output-on-failure
+
+# Production image
+FROM alpine:3.13
+LABEL maintainer "fredrik.x.olsson@ri.se"
+LABEL org.opencontainers.image.source="https://github.com/RISE-MO/cluon-lwe450"
+
+RUN apk update && apk add --no-cache \ 
+    libstdc++
+
+WORKDIR /usr/bin
+COPY --from=builder /tmp/cluon-lwe450-dest/bin/cluon-lwe450 .
+ENTRYPOINT ["/usr/bin/cluon-lwe450"]
