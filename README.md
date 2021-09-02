@@ -9,7 +9,7 @@ A [libcluon](https://github.com/chrberger/libcluon)-based microservice for liste
 * `log`, listen to an OD4 session for raw LWE450 messages from other `gatherers`  and dump these to an aggregated log file on disk
 
 ## How do I get it?
-Each release of `cluon-lwe450` is published as a docker image [here](https://github.com/orgs/RISE-MO/packages/container/package/cluon-lwe450) and is publicly available.
+Each release of `cluon-lwe450` is published as a docker image [here](https://github.com/orgs/MO-RISE/packages/container/package/cluon-lwe450) and is publicly available.
 
 Can also be used as a standalone commandline tool. No pre-built binaries are, however, provided for this purpose.
 
@@ -20,19 +20,19 @@ version: '2'
 services:    
     gatherer_1:
         container_name: cluon-lwe450-gatherer-1
-        image: ghcr.io/rise-mo/cluon-lwe450:v0.1.0
+        image: ghcr.io/mo-rise/cluon-lwe450:v0.1.0
         restart: on-failure
         network_mode: "host"
         command: "--cid 111 --id 1 gather -a 239.192.0.2 -p 60002"
     gatherer_2:
         container_name: cluon-lwe450-gatherer-2
-        image: ghcr.io/rise-mo/cluon-lwe450:v0.1.0
+        image: ghcr.io/mo-rise/cluon-lwe450:v0.1.0
         restart: on-failure
         network_mode: "host"
         command: "--cid 111 --id 2 gather -a 239.192.0.3 -p 60003"
     logger:
         container_name: cluon-lwe450-logger
-        image: ghcr.io/rise-mo/cluon-lwe450:v0.1.0
+        image: ghcr.io/mo-rise/cluon-lwe450:v0.1.0
         restart: on-failure
         network_mode: "host"
         volumes:
