@@ -31,9 +31,9 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
-  NAME risemo-message-set
-  GITHUB_REPOSITORY RISE-MO/risemo-message-set
-  VERSION 0.3.0
+  NAME morise-brefv
+  GITHUB_REPOSITORY MO-RISE/brefv
+  VERSION 0.4.0
   GIT_SHALLOW YES
   DOWNLOAD_ONLY YES
 )
@@ -43,7 +43,7 @@ add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/message_specifications
   DEPENDS cluon
   COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/message_specifications
-  COMMAND cluon-msc --cpp --out=${CMAKE_CURRENT_BINARY_DIR}/message_specifications/risemo-message-set.hpp ${risemo-message-set_SOURCE_DIR}/risemo-message-set.odvd
+  COMMAND cluon-msc --cpp --out=${CMAKE_CURRENT_BINARY_DIR}/message_specifications/morise-brefv.hpp ${morise-brefv_SOURCE_DIR}/morise-brefv.odvd
 )
 add_custom_target(
   generate_message_specifications
