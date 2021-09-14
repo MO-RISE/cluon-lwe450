@@ -43,7 +43,7 @@ services:
 ## Details
 
 ### Message set
-This microservice introduce a new OD4-compatible message type (`raw.LWE450`) in the `risemo` message set. See `src/risemo-message-set.odvd` for details.
+Makes use of the public message set for maritime applications: https://github.com/MO-RISE/brefv
 
 ### Build from source
 This repository makes use of [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake) for dependency resolution as an interal part of the CMake setup. As a result, the only requirements for building from source are:

@@ -6,9 +6,6 @@
     "cmake.environment": {
         "CPM_SOURCE_CACHE": "${env:HOME}/.cache/CPM"
     },
-    // "cmake.configureSettings": {
-    //     "CPM_risemo-message-set_SOURCE": "${env:HOME}/dev/risemo-message-set"
-    // },
     "cmake.ctestArgs": [
         "--verbose"
     ]
