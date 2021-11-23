@@ -5,14 +5,14 @@ Copyright 2021 RISE Research Institute of Sweden - Maritime Operations. Licensed
 A [libcluon](https://github.com/chrberger/libcluon)-based microservice for listening in on a multicast-based LWE450 network. This software does not perform any parsing or validation of the LWE450 messages, merely acts as a one-way bridge from a LWE450 transmission group to the libcluon group.
 
 ## How do I get it?
-Each release of `cluon-lwe450` is published as a docker image [here](https://github.com/orgs/RISE-MO/packages/container/package/cluon-lwe450) and is publicly available.
+Each release of `cluon-lwe450` is published as a docker image [here](https://github.com/orgs/MO-RISE/packages/container/package/cluon-lwe450) and is publicly available.
 
 Can also be used as a standalone commandline tool. No pre-built binaries are, however, provided for this purpose.
 
 ## Example docker-compose setup
 ```yaml
 version: '2'
-services:    
+services:
     listener_1:
         # TGTD transmission group
         container_name: cluon-lwe450-listener-1
