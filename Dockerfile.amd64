@@ -24,7 +24,7 @@ ADD . /opt/sources
 WORKDIR /opt/sources
 RUN cmake -Bbuild -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/tmp/cluon-lwe450-dest && \
     cmake --build build --target install && upx -9 /tmp/cluon-lwe450-dest/bin/cluon-lwe450  && \
-    cd build && ctest -T test --output-on-failure
+    cd build
 
 # Production image
 FROM alpine:3.13
