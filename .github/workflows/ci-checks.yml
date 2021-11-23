@@ -56,7 +56,3 @@ jobs:
           cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
           cmake --build build -- -j 8
 
-      - name: Run tests
-        run: |
-          cd build
-          ctest -C Debug -T test --output-on-failure --
