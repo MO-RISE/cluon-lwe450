@@ -16,14 +16,14 @@ services:
     listener_1:
         # TGTD transmission group
         container_name: cluon-lwe450-listener-1
-        image: ghcr.io/rise-mo/cluon-lwe450:v0.2.0
+        image: ghcr.io/rise-mo/cluon-lwe450:v0.3.0
         restart: on-failure
         network_mode: "host"
         command: "--cid 111 --id 1 gather -a 239.192.0.2 -p 60002"
     listener_2:
         # SATD transmission group
         container_name: cluon-lwe450-listener-1
-        image: ghcr.io/rise-mo/cluon-lwe450:v0.2.0
+        image: ghcr.io/rise-mo/cluon-lwe450:v0.3.0
         restart: on-failure
         network_mode: "host"
         command: "--cid 111 --id 2 gather -a 239.192.0.3 -p 60003"
