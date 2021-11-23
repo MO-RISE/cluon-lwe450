@@ -39,7 +39,7 @@ jobs:
         run: |
           cpplint --quiet --recursive src/ tests/
 
-  testing:
+  building:
     runs-on: ubuntu-latest
     needs: [linting]
 
